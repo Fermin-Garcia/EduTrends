@@ -47,3 +47,5 @@ def get_baseline(df):
     y_train = new_df['actual'] = df['risk_rating']
     
     return classification_report(y_train,new_df.baseline)
+
+

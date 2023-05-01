@@ -5,7 +5,6 @@ import pandas as pd
 from pandasai import PandasAI
 import matplotlib.pyplot as plt
 import seaborn as sns
-import scipy.stats as stats
 import explore as e
 import prepare as p
 import warnings
@@ -275,3 +274,29 @@ def testing_lunch(df):
         print('Reject the null hypothesis')
     else:
         print('Fail to reject the null hypothesis')
+ ###########################################################################################################################################################################
+        
+
+def test_prep_ttest(df, alpha=0.05):
+    test_prep_completed = df[df['test_prep_completed'] == 1]['final_score']
+    test_prep_not_completed = df[df['test_prep_completed'] == 0]['final_score']
+
+    _, p_value_completed = stats.shapiro(test_prep_completed)
+    _, p_value_not_completed = stats.shapiro(test_prep_not_completed)
+
+    _, p_value_levene = stats.levene(test_prep_completed, test_prep_not_completed)
+
+    if p_value_completed > alpha and p_value_not_completed > alpha and p_value_levene > alpha:
+        t_statistic, p_value_ttest = stats.ttest_ind(test_prep_completed, test_prep_not_completed)
+
+        if p_value_ttest < alpha:
+            return "There is a statistically significant difference in final scores between students who completed the test preparation course and those who didn't."
+        else:
+            return "There is no statistically significant difference in final scores between students who completed the test preparation course and those who didn't."
+    else:
+        U_statistic, p_value_mannwhitney = stats.mannwhitneyu(test_prep_completed, test_prep_not_completed)
+
+        if p_value_mannwhitney < alpha:
+            return "There is a statistically significant difference in final scores between students who completed the test preparation course and those who didn't."
+        else:
+            return "There is no statistically significant difference in final scores between students who completed the test preparation course and those who didn't."
