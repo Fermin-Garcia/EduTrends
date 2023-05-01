@@ -1,5 +1,5 @@
 # EduTrends Predictions
-- By Adam Harris and Fermin Garcia
+- By Fermin Garcia
 
 
 # Project Description
