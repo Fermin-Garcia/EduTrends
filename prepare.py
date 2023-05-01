@@ -95,6 +95,12 @@ def prepare_edu():
     
     df.columns = df.columns.str.replace("'", '')
     
+    for cols in df.columns:
+        if df[cols].dtype == bool:
+            df[cols] = df[cols].astype(int)
+        else:
+            pass
+    
     return df
 
 
