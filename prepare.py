@@ -5,6 +5,8 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 import explore as e
+from sklearn.cluster import KMeans
+
 
 def prepare_edu():
     # Acquire the education data
@@ -27,9 +29,11 @@ def prepare_edu():
     imputer = SimpleImputer(strategy='most_frequent')
 
     # Fill the missing values in each column using the imputer
+   # Fill the missing values in each column using the imputer
     for col in df.columns:
         if df[col].isna().sum() > 0:
-            df[col] = imputer.fit_transform(df[col].values.reshape(-1, 1))
+            df[col] = imputer.fit_transform(df[col].values.reshape(-1, 1)).ravel()
+
 
     # Rename the columns
     df.columns = ['is_male', 'parent_educ', 'free_reduced_lunch', 'test_prep_completed', 'parent_marital_status',
@@ -88,6 +92,8 @@ def prepare_edu():
     
     
     df.columns = df.columns.str.replace(' ', '_')
+    
+    df.columns = df.columns.str.replace("'", '')
     
     return df
 
