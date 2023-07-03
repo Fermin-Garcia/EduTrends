@@ -136,11 +136,11 @@ def split(df):
 	"""
 
     # Split the input dataframe into train and test sets, where test set is 20% of the original dataset
-    train, test = train_test_split(df, test_size=0.2, random_state=123)
+    train, test = train_test_split(df, test_size=0.2, random_state=666)
 
     # Further split the train set into train and validate sets,
     # where validate set is 24% (.3 * .8) of the original dataset
-    train, validate = train_test_split(train, test_size=0.3, random_state=123)
+    train, validate = train_test_split(train, test_size=0.3, random_state=666)
 
     # Return train, validate, and test dataframes
     return train, validate, test
