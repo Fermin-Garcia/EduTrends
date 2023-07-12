@@ -42,9 +42,9 @@ Our goal was to use machine learning algorithms to idnetify students who are mor
 
 - Production:
 # Link to google form `https://forms.gle/ewZwvsauLAUZXGkD9`
-    After completing the form ypu can run the following in the command line
+#### After completing the form you can run the following in the command line
 `python3 production.py`
-    This will pull the latest data in the google form sheet and will give a predicted proability of being high risk. If you fill out the form the student id is a fictious alpha numeric number. 
+#### This will pull the latest data in the google form sheet and will give a predicted proability of being high risk. If you fill out the form the student id is a fictious alpha numeric number. 
 
 
 ## Data Dictionary
