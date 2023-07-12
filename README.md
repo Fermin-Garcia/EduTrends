@@ -4,11 +4,11 @@
 
 # Project Description
 
-The purpose of this project is to create a model to indenify risk categories for students based off socioeconomic status 
+With open source data from kaggle.com, Using parents'’ socioeconomic status, we created a model to identify high-risk students who were statistically more likely to struggle academically before entering a classroom.  My analysis and modeling will ultimately enable the support of disadvantaged youths pursuing the education they deserve.
 
 # Project Goal
 
-The goal of this project is to identify students with high risk ratings to focus additional resources for those students to help them succeed in their acedemics.
+Our goal was to use machine learning algorithms to idnetify students who are more to struggle acedemically based off parents demographics.  
 
 # Initial Hypotheses
 
@@ -25,23 +25,26 @@ The goal of this project is to identify students with high risk ratings to focus
 
 - Planning - The steps required to be taken during this project will be laid out in this readme file. 
 
-- Acquisition - Data will be acquired from https://kaggle.com which is a publicly available dataset. Once the files have been downloaded, the data will be combined into one local csv file by our acquire.py script.
+- Acquisition - Dwe acquired our data from Kaggle.com, imported into google sheets and used python to import the data. 
 
-- Preparation - We will do inital exploration of our data to determine if there are outliers or null values. If the dataset contains outliers or nulls, we will make determinations on what to do with each based on the effect on the overall dataset. We will rename columns in order to make them easier to understand or work with. If there are any data types that are not best suited for the data, we will change the data types. We will also be splitting our data into train, validate and test groups to limit potential data poisoning.
+- Prepare - In prepare we removed the unnamede olumns which were just redos of the index. We also standardized the structure of the data. to keep data integrity consistent and to avoid stripping a student of their voice we imputated the values to ensure no null values in our data structure. We also calucated the final score between the math, reading, and writing scores to calulate overall average.
 
-- Preparation - We will do inital exploration of our data to determine if there are outliers or null values. If the dataset contains outliers or nulls, we will make determinations on what to do with each based on the effect on the overall dataset. This is a rare instance where we decided to keep our duplicates. We made this determination based off visual review of our duplicates, while there are some across the board, some of the numerical values that extend to four decimal places are identical. This lead us to conclude that some scores are destined to be duplicated as wine must meet specific range of qualifications to qualify as wine, so duplicate rows are sure to be duplicated.We will rename columns in order to make them easier to understand or work with. If there are any data types that are not best suited for the data, we will change the data types. We will also be splitting our data into train, validate and test groups to limit potential data poisoning. Since we are approaching the project as a regression problem.
+- Preprocessing - In preprocessing we identified convderted coloumns related to the parents to true or false then converted the boolean values (True or False) to their biary repersentation. We additionally calualted a risk score that rates a student high risk if their final score was at or below a 75 overall average. 
 
-- Exploration - We will explore the  data to find statistically valid correlations to our target variable. We will be creating at least 4 visualizations to help us determine correlations. We will also be looking at combinations of variables that could be useful for clustering. in this section we created two new categories. Final score and risk categories. Final score was created based off the average of the three score, reading, writing and math. risk categories were created based on clustering patterns we were able to identify from final score. We were able to find three distinct groups in final score. We labeled these low-risk, at risk, high risk. low risk were for students who were at or above passing. At risk were students who were at or below passing. High risk were for students who were below passing. Since the risk categories were created from final score we decided to explore on final score to see what factors affected the class that risk categories were dirived from.
+- Exploration - In our exploritory analysis We explored the statstical significance of the data and which values correlate to the parents and not the students. We determine which values had the biggest contribution to the students risk score.
 
-- Modeling - We will be approaching the problem as a classification problem. Therefore we will be making multiple models using classification algorithms such as K Nearest neighbour (KNN), Descion Tress and Random Forest. We will be creating a baseline model using the mode of risk categories from our training dataset. We will be evaluating our models using the recall for the high risk categories.
-
-
-        Recall is a performance metric that measures the proportion of relevant items that were correctly identified by a model. In the context of binary classification, recall is the ratio of true positives to the sum of true positives and false negatives.
-        In the task of predicting high-risk students based on socio-economic class, recall would be a relevant metric to consider because it emphasizes the importance of correctly identifying all the students who are actually at high risk, even if some non-high risk students are mistakenly identified as high risk. This is particularly important in situations where false negatives (i.e., high-risk students who are not identified) can have serious consequences, such as the students not receiving necessary interventions or support.
-
-        By using recall as a performance metric, we can evaluate how well our model is able to correctly identify high-risk students from different socio-economic classes, and we can compare the performance of different models or algorithms to choose the best one for our specific needs.
+- Modeling - In modeling we used serveral classification models to attempt to predict high risk students. Our strongest one that matched our base line model of an F1 score of 81%. We were unable to beat our base line. We decided to use the the predicted proabability to better gauge the at risk student. 
 
 - Delivery - We will be packaging our findings in a final_report.ipynb file.
+
+- Reproducability:
+    Running these notebooks from top to bottom will result in the same results. This is also under the assumption that you have all the installs from requirements.txt. 
+
+- Production:
+# Link to google form `https://forms.gle/ewZwvsauLAUZXGkD9`
+    After completing the form ypu can run the following in the command line
+`python3 production.py`
+    This will pull the latest data in the google form sheet and will give a predicted proability of being high risk. If you fill out the form the student id is a fictious alpha numeric number. 
 
 
 ## Data Dictionary
