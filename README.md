@@ -17,8 +17,8 @@ Our goal was to use machine learning algorithms to idnetify students who are mor
 - Does completing a test prep affect risk category ?
 
 
-- H~_0~: There is no correlation between the risk category and individual features.
-- H~a~:There is a correlation between the risk category and individual features.
+- H <sub>0</sub>: There is no correlation between the risk category and individual features.
+- H<sub>0</sub>:There is a correlation between the risk category and individual features.
 
 
 # Project Plan
