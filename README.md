@@ -1,51 +1,49 @@
 # EduTrends Predictions
-- By Fermin Garcia
 
+By Fermin Garcia
 
-# Project Description
+## Project Description
 
-With open source data from kaggle.com, Using parents'’ socioeconomic status, we created a model to identify high-risk students who were statistically more likely to struggle academically before entering a classroom.  My analysis and modeling will ultimately enable the support of disadvantaged youths pursuing the education they deserve.
+Using open-source student data from Kaggle, I built a model that uses parents' socioeconomic information to identify students who are statistically more likely to struggle academically, before they ever enter a classroom. The goal is to help schools direct support to disadvantaged students early so they get the education they deserve.
 
-# Project Goal
+## Project Goal
 
-Our goal was to use machine learning algorithms to idnetify students who are more to struggle acedemically based off parents demographics.  
+Use machine learning to identify students who are likely to struggle academically based on family and socioeconomic factors.
 
-# Initial Hypotheses
+## Initial Hypotheses
 
-- Does parents education affect the risk category of students?
-- Do students who are on free/reduce lunch have an affect on the risk category
-- Does completing a test prep affect risk category ?
+- Does parents' education level affect a student's risk category?
+- Does receiving free or reduced-price lunch affect a student's risk category?
+- Does completing a test prep course affect a student's risk category?
 
+- H<sub>0</sub>: There is no correlation between the risk category and the individual features.
+- H<sub>a</sub>: There is a correlation between the risk category and the individual features.
 
-- H <sub>0</sub>: There is no correlation between the risk category and individual features.
-- H<sub>a</sub>:There is a correlation between the risk category and individual features.
+## Project Plan
 
+- **Planning:** The steps for this project are laid out in this README.
 
-# Project Plan
+- **Acquisition:** The data comes from Kaggle. It was loaded into Google Sheets and read into Python from there.
 
-- Planning - The steps required to be taken during this project will be laid out in this readme file. 
+- **Preparation:** Removed unnamed columns that duplicated the index and standardized the structure of the data. To keep the data consistent without discarding any student's record, missing values were imputed so there are no nulls. A final score was calculated as the average of the math, reading, and writing scores.
 
-- Acquisition - Dwe acquired our data from Kaggle.com, imported into google sheets and used python to import the data. 
+- **Preprocessing:** Converted the parent-related columns to true/false values and then to 1/0. Added a risk label that marks a student as high risk if their final score is 75 or below.
 
-- Prepare - In prepare we removed the unnamede olumns which were just redos of the index. We also standardized the structure of the data. to keep data integrity consistent and to avoid stripping a student of their voice we imputated the values to ensure no null values in our data structure. We also calucated the final score between the math, reading, and writing scores to calulate overall average.
+- **Exploration:** Tested which features had a statistically significant relationship with the risk label, focusing on features that describe the parents rather than the student, and measured which ones contributed most to a student's risk.
 
-- Preprocessing - In preprocessing we identified convderted coloumns related to the parents to true or false then converted the boolean values (True or False) to their biary repersentation. We additionally calualted a risk score that rates a student high risk if their final score was at or below a 75 overall average. 
+- **Modeling:** Trained several classification models to predict high-risk students. The best model matched the baseline F1 score of 81% but did not beat it. Because of that, the final approach uses each model's predicted probability of being high risk, which gives a more useful sense of how at-risk a student is than a yes/no label.
 
-- Exploration - In our exploritory analysis We explored the statstical significance of the data and which values correlate to the parents and not the students. We determine which values had the biggest contribution to the students risk score.
+- **Delivery:** Findings are packaged in `final_report.ipynb`.
 
-- Modeling - In modeling we used serveral classification models to attempt to predict high risk students. Our strongest one that matched our base line model of an F1 score of 81%. We were unable to beat our base line. We decided to use the the predicted proabability to better gauge the at risk student. 
+- **Reproducibility:** Running the notebooks from top to bottom reproduces the results, assuming the packages in `requirements.txt` are installed.
 
-- Delivery - We will be packaging our findings in a final_report.ipynb file.
+- **Production:** New student records can be submitted through this [Google Form](https://forms.gle/ewZwvsauLAUZXGkD9). After submitting the form, run:
 
-- Reproducability:
-    Running these notebooks from top to bottom will result in the same results. This is also under the assumption that you have all the installs from requirements.txt. 
+  ```bash
+  python3 production.py
+  ```
 
-- Production:
-# Link to google form `https://forms.gle/ewZwvsauLAUZXGkD9`
-#### After completing the form you can run the following in the command line
-`python3 production.py`
-#### This will pull the latest data in the google form sheet and will give a predicted proability of being high risk. If you fill out the form the student id is a fictious alpha numeric number. 
-
+  The script pulls the latest form responses and returns each student's predicted probability of being high risk. The student ID on the form is a made-up alphanumeric value, so no real student information is needed.
 
 ## Data Dictionary
 
@@ -72,4 +70,4 @@ Our goal was to use machine learning algorithms to idnetify students who are mor
 | parent_marital_status_widowed          | A binary variable indicating whether the parent is widowed (1) or not (0)                                                                                                                                                      |
 | wkly_study_hours_<_5                   | A binary variable indicating whether the student studies less than 5 hours a week (1) or not (0)                                                                                                                                 |
 | wkly_study_hours_>_10                  | A binary variable indicating whether the student studies more than 10 hours a week (1) or not (0)                                                                                                                               |
-| risk_rating                            | A variable indicating the risk level of the student. |
+| risk_rating                            | The target: 1 if the student is high risk (final score of 75 or below), otherwise 0 |
